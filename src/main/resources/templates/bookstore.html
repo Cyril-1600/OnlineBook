@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Welcome BookStore</title>
+</head>
+<body bgcolor="#00ffff">
+<h1 align="center" th:text="'歡迎來到我的書店 ' + ${storeName}"></h1>
+<form action="#" th:object="${bookObject}" method="post">
+    <table align="center" border="1" style="background-color:wheat">
+        <tr>
+            <td th:text="展示書"></td>
+            <td th:text="書名"></td>
+            <td th:text="價格"></td>
+            <td th:text="存貨"></td>
+            <td th:text="購買數量"></td>
+        </tr>
+        <tr th:each="book:${bookList}">
+            <td th:if="${book.getBookName()} == 'Effective Java'"><img th:src="@{/images/Effective Java.jpg}"
+                                                                       alt="image" width="20%" height="20%"></td>
+            <td th:if="${book.getBookName()} == '孫子兵法'"><img th:src="@{/images/孫子兵法.jpg}" alt="image"
+                                                                 width="20%" height="20%"
+            ></td>
+            <td th:if="${book.getBookName()} == '金融煉金術'"><img th:src="@{/images/金融煉金術.jpg}" alt="image"
+                                                                   width="20%" height="20%"
+            ></td>
+            <td th:if="${book.getBookName()} == '天龍八部'"><img th:src="@{/images/天龍八部.jpg}" alt="image"
+                                                                 width="20%" height="20%"
+            ></td>
+            <td th:text="${book.getBookName()}"></td>
+            <td th:text="${book.getPrices()}"></td>
+            <td th:text="${book.getInventory()}"></td>
+            <td><input type="text"></td>
+        </tr>
+        <td>
+            <button type="submit">結帳去</button>
+        </td>
+    </table>
+</form>
+</body>
+</html>
