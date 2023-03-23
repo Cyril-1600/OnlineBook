@@ -7,8 +7,8 @@
     <title>Welcome BookStore</title>
 </head>
 <body bgcolor="#00ffff">
-<h1 align="center" th:text="'歡迎來到我的書店 ' + ${storeName}"></h1>
-<form action="#" th:object="${bookObject}" method="post">
+<h1 align="center">歡迎來到我的書店 Knowledge</h1>
+<form action="#" th:action="@{/bookstore}" method="post" th:object="${buyInfoCreation}">
     <table align="center" border="1" style="background-color:wheat">
         <tr>
             <td th:text="展示書"></td>
@@ -17,7 +17,7 @@
             <td th:text="存貨"></td>
             <td th:text="購買數量"></td>
         </tr>
-        <tr th:each="book:${bookList}">
+        <tr th:each="book, itemStat :${bookList}">
             <td th:if="${book.getBookName()} == 'Effective Java'"><img th:src="@{/images/Effective Java.jpg}"
                                                                        alt="image" width="20%" height="20%"></td>
             <td th:if="${book.getBookName()} == '孫子兵法'"><img th:src="@{/images/孫子兵法.jpg}" alt="image"
@@ -32,7 +32,10 @@
             <td th:text="${book.getBookName()}"></td>
             <td th:text="${book.getPrices()}"></td>
             <td th:text="${book.getInventory()}"></td>
-            <td><input type="text"></td>
+            <div th:if="*{buyInfoList[__${itemStat.index}__].getId()} == ${book.getBookID()}">
+                <td><input type="hidden" th:field="*{buyInfoList[__${itemStat.index}__].id}"></td>
+                <td><input type="text" th:field="*{buyInfoList[__${itemStat.index}__].buyNum}"/></td>
+            </div>
         </tr>
         <td>
             <button type="submit">結帳去</button>

@@ -15,12 +15,6 @@ public class BookService {
         return bookDao.findAll();
     }
 
-    // 但因為不會直接在前端建立書本，所以這個 method 不會用到
-    public Iterable<Book> createBook(Book book) {
-        bookDao.save(book);
-        return bookDao.findAll();
-    }
-
     // 前端使用者購買書本，所以後端的庫存數要更新
     public void updateBook(Integer id, Integer amount) {
         Book book = bookDao.findById(id).get();
